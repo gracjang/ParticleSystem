@@ -1,23 +1,16 @@
 #include "ofApp.h"
-int Rad = 1800; // radius
-int radius = 3;
-const int countCircles = 200; // number of circles
-float circlePositionX[countCircles], circlePositionY[countCircles];
-ofPoint circleXY[countCircles];
-float timeZero = 0;
-float Vel = 0.1;
 
-struct Circle {
-	ofColor color;
-	int radius;
-	float height= ofGetHeight()/2;
-	float width = ofGetWidth()/2;
-};
+
+
+ofApp::ofApp()
 	
+{
+}
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	sound.loadSound("surface.mp3");
+
+	sound.loadSound("song.mp3");
 	smooth = new float[8192];
 	
 	for (int x = 0; x < 8192; x++) {
@@ -27,20 +20,20 @@ void ofApp::setup() {
 	sound.setLoop(true);
 	sound.play();
 	for (int i = 0; i < countCircles; i++) {
-		circlePositionX[i] = ofRandom(0, 1000);
-		circlePositionY[i] = ofRandom(0, 1000);
+		Particle particle;
+		particles[i] = particle;
 	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	ofSoundUpdate();
 	float * value = ofSoundGetSpectrum(bands);
-	
-	float time = ofGetElapsedTimef();
-	float deltaTime = time - timeZero;
+	currentTime = ofGetElapsedTimef();
+	float deltaTime = currentTime - timeZero;
 	deltaTime = ofClamp(deltaTime, 0.0, 0.1);
-	timeZero = time;
+	timeZero = currentTime;
 	for (int k = 0; k < bands; k++) {
 		smooth[k] *= 0.8f;
 		smooth[k] = max(smooth[k], value[k]);
@@ -54,12 +47,10 @@ void ofApp::update() {
 	Vel = ofMap(smooth[100], 0, 0.1, 0.5, 1.2);
 
 	for (int j = 0; j < countCircles; j++) {
-		circlePositionX[j] += Vel * deltaTime;
-		circlePositionY[j] += Vel * deltaTime;
-		circleXY[j].x = ofSignedNoise(circlePositionX[j]) * Rad;
-		circleXY[j].y = ofSignedNoise(circlePositionY[j]) * Rad;
-
-		float color;
+		particles[j].circlePosition += Vel * deltaTime;
+		particles[j].circleXY.x = ofSignedNoise(particles[j].circlePosition.x) *Rad;
+		particles[j].circleXY.y = ofSignedNoise(particles[j].circlePosition.y) *Rad;
+		float color=0.0;
 		colors.push_back(color);
 		colors[j] = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
 	}
@@ -71,26 +62,34 @@ void ofApp::draw() {
 	ofBackground(0, 0, 0);	//Set up the background
 	ofPushMatrix();
 	ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
-	ofFill();
+	
 
 
-	float bass = (smooth[1] * 7 > 5) ? smooth[1] * 6 : 1;
-	float bass2 = (smooth[1] * 7 > 5) ? smooth[1] * 1.8 : 1;
+	float bass = (smooth[1] * 7 > 5) ? smooth[1] * 1.5: 1;
+	float bass2 = (smooth[1] * 7 > 5) ? smooth[1] * 0.5 : 0.2;
 	for (int i = 0; i < countCircles; i++) {
-			ofCircle(circleXY[i], bass);
+		
+		ofCircle(particles[i].circleXY, bass);
 			
 		}
 	
-	float dist = 140;	
-	
+	float dist = 75;	
+	float delay = 0.5;
 	for (int j = 0; j < countCircles; j++) {
 		for (int k = j + 1; k < countCircles; k++) {
-			float distance = ofDist(circleXY[j].x, circleXY[j].y, circleXY[k].x, circleXY[k].y);
+			float distance = ofDist(particles[j].circleXY.x, particles[j].circleXY.y, particles[k].circleXY.x, particles[k].circleXY.y);
 			if (distance < dist) {
-				float alpha = ofMap(distance, 0, 180, 150, 0);
-				ofSetColor(colors[j]);
-				ofSetLineWidth(bass2);
-				ofLine(circleXY[j], circleXY[k]);
+				float currentTime2 = ofGetElapsedTimef();
+				ofSetLineWidth(0.8);
+				if (currentTime2 >= lastColorTime + delay)
+				{
+					ofSetColor(colors[j]);
+					lastColorTime = currentTime2;
+					
+
+				}
+
+				ofLine(particles[j].circleXY, particles[k].circleXY);
 			}
 		}
 	}
