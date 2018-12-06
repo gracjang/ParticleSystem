@@ -3,58 +3,33 @@
 
 
 ofApp::ofApp()
-	
 {
 }
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+	sound_manager.setup_sound("song.mp3");
+	particle_manager.setup_particles();
 
-	sound.loadSound("song.mp3");
-	smooth = new float[8192];
-	
-	for (int x = 0; x < 8192; x++) {
-		smooth[x] = 0;
-	}
-	bands = 256;
-	sound.setLoop(true);
-	sound.play();
-	for (int i = 0; i < countCircles; i++) {
-		Particle particle;
-		particles[i] = particle;
-	}
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	ofSoundUpdate();
-	float * value = ofSoundGetSpectrum(bands);
-	currentTime = ofGetElapsedTimef();
-	float deltaTime = currentTime - timeZero;
-	deltaTime = ofClamp(deltaTime, 0.0, 0.1);
-	timeZero = currentTime;
-	for (int k = 0; k < bands; k++) {
-		smooth[k] *= 0.8f;
-		smooth[k] = max(smooth[k], value[k]);
-
-		//Vel += smooth[k] * deltaTime;
-		//radius = smooth[k] * 10;
-
-
-	}
-	Rad = ofMap(smooth[2], 1, 2, 500, 700, true);
-	Vel = ofMap(smooth[100], 0, 0.1, 0.5, 1.2);
-
-	for (int j = 0; j < countCircles; j++) {
-		particles[j].circlePosition += Vel * deltaTime;
-		particles[j].circleXY.x = ofSignedNoise(particles[j].circlePosition.x) *Rad;
-		particles[j].circleXY.y = ofSignedNoise(particles[j].circlePosition.y) *Rad;
-		float color=0.0;
-		colors.push_back(color);
-		colors[j] = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
-	}
 	
+	
+	particle_manager.set_time();
+	sound_manager.set_smooth_sound();
+	const float smoothRadius = sound_manager.return_smooth(2);
+	const float smoothVelocity = sound_manager.return_smooth(100);
+
+	Rad = ofMap(smoothRadius, 1, 2, 500, 700, true);
+	Vel = ofMap(smoothVelocity, 0, 0.1, 0.5, 1.2);
+	for (int j = 0; j < countCircles; j++) {
+		particle_manager.change_positions(j, Vel, Rad);
+		particle_manager.set_colors(j);
+	}
 }
 
 //--------------------------------------------------------------
@@ -65,31 +40,31 @@ void ofApp::draw() {
 	
 
 
-	float bass = (smooth[1] * 7 > 5) ? smooth[1] * 1.5: 1;
-	float bass2 = (smooth[1] * 7 > 5) ? smooth[1] * 0.5 : 0.2;
+	float bass = sound_manager.set_radius_circle(1);
+
 	for (int i = 0; i < countCircles; i++) {
 		
-		ofCircle(particles[i].circleXY, bass);
+		particle_manager.draw_circle(bass);
 			
 		}
 	
-	float dist = 75;	
+	float dist = 90;	
 	float delay = 0.5;
 	for (int j = 0; j < countCircles; j++) {
 		for (int k = j + 1; k < countCircles; k++) {
-			float distance = ofDist(particles[j].circleXY.x, particles[j].circleXY.y, particles[k].circleXY.x, particles[k].circleXY.y);
+			float distance = particle_manager.set_distance(j,k);
 			if (distance < dist) {
 				float currentTime2 = ofGetElapsedTimef();
 				ofSetLineWidth(0.8);
 				if (currentTime2 >= lastColorTime + delay)
 				{
-					ofSetColor(colors[j]);
+					particle_manager.set_color_line(j);
 					lastColorTime = currentTime2;
 					
 
 				}
 
-				ofLine(particles[j].circleXY, particles[k].circleXY);
+				particle_manager.draw_line(j, k);
 			}
 		}
 	}

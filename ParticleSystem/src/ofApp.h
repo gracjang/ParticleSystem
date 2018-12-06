@@ -2,9 +2,10 @@
 
 #include "ofMain.h"
 #include "../Particle.h"
+#include "../SoundManager.h"
+#include "../ParticleManager.h"
 
 
-#define countCircles 150
 class ofApp : public ofBaseApp{
 
 	public:
@@ -21,22 +22,18 @@ class ofApp : public ofBaseApp{
 		void mouseReleased(int x, int y, int button);
 		void mouseEntered(int x, int y);
 		void mouseExited(int x, int y);
-		float currentTime;
-		float lastColorTime;
-		ofSoundPlayer sound;
-		int bands;
-		float * smooth;
+		
+		
 		vector<ofColor> colors;
 		ofPolyline line;
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-
-
+		SoundManager sound_manager;
+		ParticleManager particle_manager;
 		int Rad = 1800; // radius
 		int radius = 3;
-		
-		float timeZero = 0;
+		float lastColorTime;
 		float Vel = 0.1;
 		
 };
