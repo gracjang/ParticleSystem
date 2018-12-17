@@ -196,9 +196,8 @@ D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\libs;%(AdditionalInclude
     <ClCompile Include="D:\of_v20181115_vs2017_release\addons\ofxGui\src\ofxToggle.cpp" />
     <ClCompile Include="D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\libs\CreEPS.cpp" />
     <ClCompile Include="D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\src\ofxVectorGraphics.cpp" />
-    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="MyCircle.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -218,9 +217,8 @@ D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\libs;%(AdditionalInclude
     <ClInclude Include="D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\libs\CreEPS.hpp" />
     <ClInclude Include="D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\libs\CreEPS_Types.hpp" />
     <ClInclude Include="D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\src\ofxVectorGraphics.h" />
-    <ClInclude Include="Particle.h" />
+    <ClInclude Include="MyCircle.h" />
     <ClInclude Include="ParticleManager.h" />
-    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="src\ofApp.h" />
   </ItemGroup>
