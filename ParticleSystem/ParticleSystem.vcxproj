@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -45,7 +45,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
@@ -184,6 +184,7 @@ D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\libs;%(AdditionalInclude
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CenterBall.cpp" />
     <ClCompile Include="D:\of_v20181115_vs2017_release\addons\ofxGui\src\ofxBaseGui.cpp" />
     <ClCompile Include="D:\of_v20181115_vs2017_release\addons\ofxGui\src\ofxButton.cpp" />
     <ClCompile Include="D:\of_v20181115_vs2017_release\addons\ofxGui\src\ofxColorPicker.cpp" />
@@ -203,6 +204,7 @@ D:\of_v20181115_vs2017_release\addons\ofxVectorGraphics\libs;%(AdditionalInclude
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CenterBall.h" />
     <ClInclude Include="D:\of_v20181115_vs2017_release\addons\ofxGui\src\ofxBaseGui.h" />
     <ClInclude Include="D:\of_v20181115_vs2017_release\addons\ofxGui\src\ofxButton.h" />
     <ClInclude Include="D:\of_v20181115_vs2017_release\addons\ofxGui\src\ofxColorPicker.h" />

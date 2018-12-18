@@ -46,6 +46,7 @@
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="MyCircle.cpp" />
+    <ClCompile Include="CenterBall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -119,6 +120,7 @@
     <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="MyCircle.h" />
+    <ClInclude Include="CenterBall.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

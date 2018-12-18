@@ -1,10 +1,11 @@
 #include "MyCircle.h"
 
 void MyCircle::setup(float initialX, float initialY) {
-	x = initialX;
-	y = initialY;
-	speedX = ofRandom(-10, 10);
-	speedY = ofRandom(-10, 10);
+	position.x = initialX;
+	position.y = initialY;
+	velocity.x = ofRandom(-10, 10);
+	velocity.y = ofRandom(-10, 10);
+	mass = ofRandom(1, 5);
 	counter = 0;
 	minRadius = 10;
 	maxRadius = 20;
@@ -14,15 +15,16 @@ void MyCircle::setup(float initialX, float initialY) {
 
 //--------------------------------------------------------------
 void MyCircle::update(float Vel) {
-	x += speedX * Vel;
-	y += speedY * Vel;
+	acceleration = force / mass;
+	velocity = velocity + acceleration;
+	position = position + velocity * Vel;
 
-	if (x <45|| x+45>ofGetWidth()) {
-		speedX *= -1;
+	if (position.x <45|| position.x+45>ofGetWidth()) {
+		velocity.x *= -1;
 		
 	}
-	if (y<45|| y+45>ofGetHeight()) {
-		speedY *= -1;
+	if (position.y<45|| position.y+45>ofGetHeight()) {
+		velocity.y*= -1;
 		
 	}
 	counter += 0.1;
@@ -33,7 +35,7 @@ void MyCircle::update(float Vel) {
 //--------------------------------------------------------------
 void MyCircle::draw(float radius) {
 	ofSetColor(127, 100);
-	ofCircle(x, y, maxRadius + sin(counter)*(maxRadius - minRadius));
+	ofCircle(position,maxRadius + sin(counter)*(maxRadius - minRadius));
 	ofSetColor(color);
-	ofCircle(x, y, radius);
+	ofCircle(position, radius);
 }

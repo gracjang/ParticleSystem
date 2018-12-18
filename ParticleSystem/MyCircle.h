@@ -5,11 +5,14 @@ public:
 	void setup(float initialX, float initialY);
 	void update(float Vel);
 	void draw(float Radius);
-	float x, y;
 	ofPoint position;
-	float speedX, speedY;
 	float counter;
 	float minRadius, maxRadius;
 	ofColor color;
+	ofPoint force;
+	ofPoint velocity;
+	ofPoint acceleration;
+	float lifeTime = 1.0;
+	int mass;
 
 };

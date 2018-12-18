@@ -39,13 +39,13 @@ void SoundManager::set_smooth_sound()
 float SoundManager::get_bassValueToCircle(int elementOfArray )
 {	
 
-	float bass = (_smooth[elementOfArray] * 7 > 5) ? _smooth[elementOfArray] * 8 : 3;
+	float bass = (_smooth[elementOfArray] * 7 > 5) ? _smooth[elementOfArray] * 6 : 3;
 	return bass;
 }
 
 float SoundManager::get_bassValueToLine(int elementOfArray)
 {
-	float bass2 = (_smooth[elementOfArray] * 7 > 5) ? _smooth[elementOfArray] * 1.2 : 0.5;
+	float bass2 = (_smooth[elementOfArray] * 7 > 5) ? _smooth[elementOfArray] * 0.8 : 0.5;
 	return bass2;
 }
 

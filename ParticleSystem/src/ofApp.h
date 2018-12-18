@@ -4,6 +4,7 @@
 #include "../SoundManager.h"
 #include "../ParticleManager.h"
 #include "../MyCircle.h"
+#include "../CenterBall.h"
 
 
 class ofApp : public ofBaseApp{
@@ -13,6 +14,8 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+		void RepulsionForce(int i);
+	
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -27,6 +30,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		SoundManager sound_manager;
 		ParticleManager particle_manager;
+		CenterBall World;
 private:
 		float lastColorTime;
 		float Vel = 0.1;
