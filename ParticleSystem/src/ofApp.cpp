@@ -15,9 +15,6 @@ void ofApp::setup() {
 	ofSetCircleResolution(100);
 	ofEnableAlphaBlending();
 	mouseHasPressed = false;
-	
-	
-
 }
 
 //--------------------------------------------------------------
@@ -39,30 +36,13 @@ void ofApp::update() {
 			RepulsionForce(i);
 			newCircles[i].update(Vel);
 		}
-
-	
-
 	}
 
-	/*
-	 *particle_manager.set_time();
-	sound_manager.set_smooth_sound();
-	const float smoothRadius = sound_manager.return_smooth(2);
-	const float smoothVelocity = sound_manager.return_smooth(100);
-
-	Rad = ofMap(smoothRadius, 1, 2, 500, 700, true);
-	Vel = ofMap(smoothVelocity, 0, 0.1, 0.2, 1.2);
-	for (int j = 0; j < particles.size(); j++) {
-		particle_manager.change_positions(j, Vel, Rad);
-		particle_manager.set_colors(j);
-	}
-	*/
 	
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	ofDrawBitmapString("click to add circles, press <backspace> to delete", 10, 20);
 	ofSetColor(World.color);
 	ofDrawCircle(World.position, World.radius);
 	if (mouseHasPressed) {
@@ -79,8 +59,6 @@ void ofApp::draw() {
 						ofLine(newCircles[i].position, newCircles[k].position);
 					}
 				}
-				//ofLine(newCircles[i - 1].position.x, newCircles[i - 1].position.y, newCircles[i].position.x, newCircles[i].position.y);
-				//ofSetLineWidth(lineRadius);
 			}
 			
 			newCircles[i].draw(circleRadius);
@@ -88,44 +66,6 @@ void ofApp::draw() {
 	}
 
 
-	
-	/*
-	 ofBackground(0, 0, 0);	//Set up the background
-	ofPushMatrix();
-	ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
-	
-
-
-	float bass = sound_manager.set_radius_circle(1);
-	for (int i = 0; i < particles.size(); i++) {
-
-		particle_manager.draw_circle(bass);
-		
-			
-		}
-	
-	float dist = 90;	
-	float delay = 0.8;
-	for (int j = 0; j < particles.size(); j++) {
-		for (int k = j + 1; k < particles.size(); k++) {
-			float distance = particle_manager.set_distance(j,k);
-			if (distance < dist) {
-				float currentTime2 = ofGetElapsedTimef();
-				ofSetLineWidth(0.8);
-				if (currentTime2 >= lastColorTime + delay)
-				{
-					particle_manager.set_color_line(j);
-					lastColorTime = currentTime2;
-					
-
-				}
-
-				particle_manager.draw_line(j, k);
-			}
-		}
-	}
-	
-	ofPopMatrix();*/
 	
 }
 void ofApp::RepulsionForce(int i) {

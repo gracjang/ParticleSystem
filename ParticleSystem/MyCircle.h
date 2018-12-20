@@ -12,7 +12,8 @@ public:
 	ofPoint force;
 	ofPoint velocity;
 	ofPoint acceleration;
-	float lifeTime = 1.0;
+	float lifeTime;
 	int mass;
+	
 
 };

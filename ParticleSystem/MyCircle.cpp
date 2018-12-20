@@ -9,6 +9,7 @@ void MyCircle::setup(float initialX, float initialY) {
 	counter = 0;
 	minRadius = 10;
 	maxRadius = 20;
+	lifeTime = 1.0;
 	color = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
 }
 

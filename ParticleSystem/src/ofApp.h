@@ -15,7 +15,6 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 		void RepulsionForce(int i);
-	
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -28,10 +27,11 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		
+private:
 		SoundManager sound_manager;
 		ParticleManager particle_manager;
 		CenterBall World;
-private:
 		float lastColorTime;
 		float Vel = 0.1;
 		vector <MyCircle> newCircles;
